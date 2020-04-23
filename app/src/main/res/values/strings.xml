@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">iTunesSearcher</string>
+    <string name="duration">\"Duration: \"</string>
+    <string name="released">\"Released: \"</string>
+    <string name="genre">\"Genre: \"</string>
+
+    <string name="search_hint">Enter words to search</string>
+</resources>
