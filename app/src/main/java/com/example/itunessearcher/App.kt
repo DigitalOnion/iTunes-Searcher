@@ -5,14 +5,13 @@ import android.content.Context
 
 //This class allows accessing the App's context anywhere
 class App : Application() {
+    companion object {
+        lateinit var context: Context
+            private set
+    }
 
     override fun onCreate() {
         super.onCreate()
         context = this
-    }
-
-    companion object {
-        var context: Context? = null
-            private set
     }
 }

@@ -10,7 +10,7 @@ android {
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.example.itunessearcher"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -53,12 +53,15 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
 
+    // jackson
+    implementation 'com.squareup.retrofit2:converter-jackson:2.8.1'
+
     // room database
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
-//    // optional - Kotlin Extensions and Coroutines support for Room
-//    implementation "androidx.room:room-ktx:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
 //    // Test helpers
 //    testImplementation "androidx.room:room-testing:$room_version"
 }

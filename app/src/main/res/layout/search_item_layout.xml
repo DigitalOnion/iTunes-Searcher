@@ -1,58 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/item_border"
-    android:layout_margin="4dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_album_art"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_image_padding"
+        android:layout_marginTop="@dimen/item_image_padding"
+        android:layout_marginBottom="@dimen/item_image_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
-        <TextView
-            android:id="@+id/tv_track_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toEndOf="@+id/iv_album_art"
-            app:layout_constraintTop_toTopOf="@+id/iv_album_art"
-            tools:text="track name" />
+    <TextView
+        android:id="@+id/tv_track_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_text_margin"
+        app:layout_constraintStart_toEndOf="@+id/iv_album_art"
+        app:layout_constraintTop_toTopOf="@+id/iv_album_art"
+        tools:text="track name" />
 
-        <ImageView
-            android:id="@+id/iv_album_art"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+    <TextView
+        android:id="@+id/tv_detail_album_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/tv_track_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_track_name"
+        tools:text="album name" />
 
-        <TextView
-            android:id="@+id/tv_artist_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_track_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_detail_album_name"
-            tools:text="artist name" />
+    <TextView
+        android:id="@+id/tv_artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="@id/iv_album_art"
+        app:layout_constraintStart_toStartOf="@+id/tv_track_name"
+        tools:text="artist name" />
 
-        <TextView
-            android:id="@+id/tv_detail_album_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/tv_track_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_track_name"
-            tools:text="album name" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

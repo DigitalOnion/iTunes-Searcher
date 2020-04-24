@@ -1,8 +1,18 @@
 <resources>
     <string name="app_name">iTunesSearcher</string>
-    <string name="duration">\"Duration: \"</string>
-    <string name="released">\"Released: \"</string>
-    <string name="genre">\"Genre: \"</string>
+    <string name="app_label">iTunes Search</string>
 
-    <string name="search_hint">Enter words to search</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
+    <string name="search_hint">Enter the words to search</string>
+    <string name="empty_database">Empty music track cache</string>
+    <string name="empty_db_title">Empty Cache</string>
+    <string name="empty_db_message">Do you want to erase the contents of the MovieTrack cache</string>
+
+    <string name="network_error">There was a Network Error</string>
+
+    <string name="duration">Duration: </string>
+    <string name="released">Released: </string>
+    <string name="genre">Genre: </string>
 </resources>

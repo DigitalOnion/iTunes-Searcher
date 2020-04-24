@@ -1,33 +1,49 @@
 package com.example.itunessearcher.viewmodel
 
+import android.os.Handler
 import android.widget.Toast
-import androidx.lifecycle.LiveData
+import androidx.core.util.Consumer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.itunessearcher.App
+import com.example.itunessearcher.model.DbPersistence
 import com.example.itunessearcher.model.MusicList
 import com.example.itunessearcher.model.Network
+import com.example.itunessearcher.model.MusicTrack
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.HttpURLConnection
 
 class MusicViewModel : ViewModel() {
 
-    private val baseApiUrl: String = " https://itunes.apple.com/"
+    private val baseApiUrl: String = "https://itunes.apple.com/"
 
-    private val searchResults = MutableLiveData<MusicList>()
-    fun getSearchResults(): LiveData<MusicList> = searchResults
+    val searchNetwork = MutableLiveData<List<MusicTrack>>()
+    val networkError = MutableLiveData<Int>()
+    val searchedTerm = MutableLiveData<String> ()
 
-    private val searchDBResults = MutableLiveData<MusicList>()
-    fun getSearchDBResults(): LiveData<MusicList> = searchDBResults
+//    val consumerCache = Consumer<MutableList<MusicTrack>> {  }
 
-    fun getTracksFromDB(term: String) {
-
+    fun getTracks(term: String, handler: Handler) {
+        DbPersistence.retrieveCacheSearch(term, Consumer<MutableList<MusicTrack>> {
+            if(it.size > 0) {
+                handler.post(
+                    Runnable {
+                        Toast.makeText(App.context, "showing cache music tracks", Toast.LENGTH_LONG).show()
+                        searchNetwork.value = it
+                    }
+                )
+            } else {
+                handler.post(
+                    Runnable {
+                        Toast.makeText(App.context, "showing music tracks from API", Toast.LENGTH_LONG).show()
+                        getTracksFromAPI(term)
+                    }
+                )
+            }
+        })
     }
-
-
-    private val searchNetworkResults = MutableLiveData<MusicList>()
-    fun getSearchNetworkResults(): LiveData<MusicList> = searchNetworkResults
 
     fun getTracksFromAPI(term: String) {
         val network = Network(baseApiUrl)
@@ -37,12 +53,18 @@ class MusicViewModel : ViewModel() {
                     call: Call<MusicList>,
                     response: Response<MusicList>
                 ) {
-                    searchNetworkResults.value = response.body()
+                    if(response.isSuccessful) {
+                        val musicList = response.body()
+                        searchNetwork.value = musicList?.results
+                    } else {
+                        networkError.value = response.code()
+                    }
                 }
                 override fun onFailure(call: Call<MusicList>, t: Throwable) {
                     t.printStackTrace()
-                    Toast.makeText(App.context, t.toString(), Toast.LENGTH_LONG).show()
+                    networkError.value = HttpURLConnection.HTTP_BAD_REQUEST
                 }
             })
     }
+
 }
