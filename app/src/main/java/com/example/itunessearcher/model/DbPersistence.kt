@@ -15,7 +15,7 @@ object DbPersistence {
     ).build()
 
     fun persist(term: String?, musicTrackList: List<MusicTrack>) {
-        if(term == null) return
+        if(term == null || musicTrackList.isEmpty()) return
         val termsList : MutableList<Term> = musicTrackList.map{ Term(term, it.trackId) }.toMutableList()
 
         GlobalScope.launch {

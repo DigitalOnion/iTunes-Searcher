@@ -26,6 +26,14 @@ class MusicViewModel : ViewModel() {
 //    val consumerCache = Consumer<MutableList<MusicTrack>> {  }
 
     fun getTracks(term: String, handler: Handler) {
+        if(term.isBlank()) {
+            handler.post(
+                Runnable {
+                    searchNetwork.value = mutableListOf<MusicTrack>()
+                }
+            )
+            return
+        }
         DbPersistence.retrieveCacheSearch(term, Consumer<MutableList<MusicTrack>> {
             if(it.size > 0) {
                 handler.post(
